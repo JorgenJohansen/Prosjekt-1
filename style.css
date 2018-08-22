@@ -1,1 +1,29 @@
+body{
+    background-color: rgba(0, 0, 255, 0.774);
+}
+.container1{
+    display:flex;
+    
+}
+.container2{
+    display:flex;
+    background-color: darkblue;
+    height: 450px;
+}
+.container3{
+    text-align:center
+}
+.container4{
+    display:flex;
+    display:none;
+    
+}
+h1, h3, p{
+    text-align: center;
+}
 
+.container1, .container2, .container4{
+    border: 1px solid black;
+    margin: 12px;
+    flex-direction: column;
+}
