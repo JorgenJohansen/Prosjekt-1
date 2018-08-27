@@ -3,87 +3,107 @@
 var canvas = document.getElementById('canvas');
 var c = canvas.getContext("2d");
 
-//Funksjon som lager rektangler
-function rectangle(x,y,width,height,color){
-    c.beginPath();
-    c.rect(x, y, width, height);
-    c.fillStyle = color;
-    c.fill();
-    /*c.lineWidth = 7;
-    c.strokeStyle = 'black';*/
-    c.stroke();
-}
+//canvas.width = canvas.scrollWidth;
+//canvas.width = canvas.scrollHeight;
 
-//Funksjon som lager sirkler
-//Det er en liten overskriving her, som må løses på en annen måte
-//Kan være lurt å lage objekter eller noe annet
-/*
-function circle(x,y,radius,angle,counterClockwise,){
-    c.beginPath();
-    c.arc(x,y,radius,angle,counterClockwise);
-    c.lineWidth = 4;
-    c.strokeStyle = 'red';
-    c.stroke();
-}*/
-
-//circle(50,50,20,Math.PI*2,false);
-
-
-//Funksjon som lager bezier kurver
-
-//Funksjon som animerer figurer
-
-//Funksjon som skifter farge på figurer
-
-
-
-//Lage rektangler horisontalt
-for(var i = 0; i < 9; i++){
-    rectangle(i*50,0,50,25,"green");
-    rectangle(i*50,425,50,25,"blue");
-    
-}
-//Lage rektangler vertikalt
-for(var i = 0; i < 8;i++){
-    rectangle(0,25+i*50,25,50,"red");
-    rectangle(425,25+i*50,25,50,"yellow");
-}
-
-//Forbedringspotensiale: få begge inn i en for loop
-
-
-
-//
-$(document).ready(function(){
-    $("button").click(function(){
-        $(".container4").toggle();
-    });
-});
-
-//Forbedringspotensiale: skift navn på knapp når dokumentasjonen vises
-
-
-/*
-function Circle(x,y,radius){
+//Circle type
+var Circle = function(x,y,radius){
     this.x = x;
     this.y = y;
     this.radius = radius;
-    
-    this.draw = function(){//Anonymous function
-        c.beginPath();
-        c.arc(x,y,radius,0,Math.PI*2,false);
-        c.strokeStyle = 'blue';
-        c.stroke();
-    }
 }
 
-var circle = new Circle(10,10,40);
-circle.draw();
+Circle.prototype.isHitBy = function(x,y,cx,cy,radius){
+    //Sjekker om vi er inne i sirkelen
+    //var distance = Math.sqrt(Math.pow(x - this.x,2) + Math.pow(y - this.y, 2));
+    let distance = (x - cx) * (x - cx) + (y- cy)*(y - cy);
+    //var distance = Math.pow(x - this.x,2) + Math.pow(y - this.y,2);
+    return distance <= radius * radius;
+}
 
-function Rectangle(x, y, width, height){
-    c.beginpath();
-    c.fillRect(100, 100, 100, 100);
+//Rectangle type
+var Rectangle = function(x,y,width,height,color){
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+}
 
-    c.stroke();
-}*/
+Rectangle.prototype.isHitBy = function(x,y){
+    //Sjekker om vi er inne i rektangelet
+    return (x >= this.x && x <= this.x + this.width
+    && y >= this.y && y <= this.y + this.height);
+}
+
+//Creates shapes (and draw)
+    
+
+var circles = [
+    new Circle(150,80,30),    
+    new Circle(150,150,30),
+    new Circle(150,220,30),
+    new Circle(150,290,30),
+    new Circle(150,360,30),
+]
+var rectangle = new Rectangle(250,50,100,300);
+
+c.beginPath();
+for(let i = 0; i < circles.length; i++){
+    c.arc(circles[i].x,circles[i].y,circles[i].radius,0,Math.PI*2);
+}
+/*
+c.arc(circle.x,circle.y,circle.radius,0,Math.PI*2);
+c.arc(circle2.x,circle2.y,circle2.radius,0,Math.PI*2);
+c.arc(circle3.x,circle3.y,circle3.radius,0,Math.PI*2);
+c.arc(circle4.x,circle4.y,circle4.radius,0,Math.PI*2);
+c.arc(circle5.x,circle5.y,circle5.radius,0,Math.PI*2);*/
+c.fill();
+
+c.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+c.closePath();
+
+function redrawColor(color){
+    c.clearRect(50,50,1,200);
+    c.beginPath();
+    c.arc(circles[0].x,circles[0].y,circles[0].radius,0,Math.PI*2);
+    c.fillStyle = color;
+    c.fill();
+    c.closePath();
+}
+
+var biggerX = 25;
+var biggerY = 25;
+
+function makeBigger(){
+    c.clearRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
+    c.beginPath();
+    c.fillStyle = "black";
+    c.fillRect(rectangle.x, rectangle.y, rectangle.width + biggerX++, rectangle.height + biggerY++);
+    c.closePath();
+}
+
+canvas.addEventListener('click',function(e){
+    //console.log(e);
+    var cBounds = canvas.getBoundingClientRect();
+    //console.log(cBounds);
+    var mouseX = e.clientX - cBounds.left;
+    var mouseY = e.clientY - cBounds.top;
+
+    //console.log(mouseX, mouseY);
+    if(circles[0].isHitBy(mouseX,mouseY,150,150,100)){
+        redrawColor("red");
+    }
+    
+    if(rectangle.isHitBy(mouseX,mouseY)){
+        console.log('Rectangle hit');
+        makeBigger();
+    }
+});
+
+//Viser og skjuler dokumentasjon
+$(document).ready(function(){
+    $("button").click(function(){
+        $(".box4").toggle();
+    });
+});
 

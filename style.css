@@ -1,19 +1,25 @@
 body{
     background-color: rgba(0, 0, 255, 0.774);
 }
-.container1{
+.container{
     display:flex;
+    flex-direction: column;
+}
+
+.box1{
+    display:block;
+
+}
+
+.box2{
+    display: block;
+    background-color: darkblue;
     
 }
-.container2{
-    display:flex;
-    background-color: darkblue;
-    height: 450px;
+.box3{
+    text-align:center;
 }
-.container3{
-    text-align:center
-}
-.container4{
+.box4{
     display:flex;
     display:none;
     
@@ -22,8 +28,7 @@ h1, h3, p{
     text-align: center;
 }
 
-.container1, .container2, .container4{
+.box1, .box2, .box4{
     border: 1px solid black;
     margin: 12px;
-    flex-direction: column;
 }
