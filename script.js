@@ -13,6 +13,7 @@ var Circle = function(x,y,radius){
     this.radius = radius;
 }
 
+//Sjekker om vi er inne i sirkelen
 Circle.prototype.isHitBy = function(x,y,cx,cy,radius){
     //Sjekker om vi er inne i sirkelen
     //var distance = Math.sqrt(Math.pow(x - this.x,2) + Math.pow(y - this.y, 2));
@@ -29,6 +30,7 @@ var Rectangle = function(x,y,width,height,color){
     this.height = height;
 }
 
+//Sjekker om vi er inne i rektangelet
 Rectangle.prototype.isHitBy = function(x,y){
     //Sjekker om vi er inne i rektangelet
     return (x >= this.x && x <= this.x + this.width
@@ -36,8 +38,6 @@ Rectangle.prototype.isHitBy = function(x,y){
 }
 
 //Creates shapes (and draw)
-    
-
 var circles = [
     new Circle(150,80,30),    
     new Circle(150,150,30),
@@ -58,10 +58,10 @@ c.arc(circle3.x,circle3.y,circle3.radius,0,Math.PI*2);
 c.arc(circle4.x,circle4.y,circle4.radius,0,Math.PI*2);
 c.arc(circle5.x,circle5.y,circle5.radius,0,Math.PI*2);*/
 c.fill();
-
 c.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 c.closePath();
 
+//Skifter farge på sirkler
 function redrawColor(color){
     c.clearRect(50,50,1,200);
     c.beginPath();
@@ -74,6 +74,7 @@ function redrawColor(color){
 var biggerX = 25;
 var biggerY = 25;
 
+//Lager større rekangler
 function makeBigger(){
     c.clearRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
     c.beginPath();
@@ -82,6 +83,7 @@ function makeBigger(){
     c.closePath();
 }
 
+//User input
 canvas.addEventListener('click',function(e){
     //console.log(e);
     var cBounds = canvas.getBoundingClientRect();
