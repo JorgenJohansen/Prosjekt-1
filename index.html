@@ -10,15 +10,15 @@
     <div class="container">
         <div class="box1">
             <h1><u>Pierre's presents - A canvas experience</u></h1>
-            <p>Pierre Bourdou er en fransk maler og programmerer som startet sin karierre for 5 år siden.
-                    Han bruker mye av tiden sin til å eksperimentere og lage nye maleri ved hjelp av canvas.
+            <p><i>Pierre Bordeaux er en fransk maler og programmerer som startet sin karierre for 5 år siden.
+            Han bruker mye av tiden sin til å eksperimentere og lage nye maleri ved hjelp av canvas.</i>
             </p>
         </div>
         <div class="box2">
             <canvas id="canvas" width="600" height="450"></canvas>
         </div>
         <div class="box3">
-            <button type="button">Dokumentasjon</button>
+            <button class="button" type="button">Dokumentasjon</button>
         </div>
         <div class="box4">
             <h3><u>Dokumentasjon:</u></h3>
@@ -26,37 +26,53 @@
                 <p>For dette prosjektet har jeg valgt å tegne og animere figurerer med canvas, style nettsiden med CSS flexbox og bruke JQuery til å vise og gjemme dokumentasjonen.
                 </p>
                 <p>
-                <u>Canvas:</u><br>
-                Dette kan bli brukt til å tegne grafikk ved hjelp av skripting i javascript. Det kan bli brukt til å tegne figurer og grafer, samt animasjon.
-                <br><u>SVG:</u><br>
-                Dette er et XML-basert vektorbilde format for to-dimensjonal grafikk som støtter både interaktivitet og animasjon. SVG bilder og deres oppførsel er definert i XML tekstfiler, som betyr at de kan bli traversert, indeksert, programmert og komprimert.
-                <br><u>Hvorfor canvas?</u><br>
-                Med tanke på tidligere erfaring og bruk av canvas var det mer fornuftig for min del å bygge på den kunnskapen. Selv om jeg i ettertid ser at animering av figurerer kunne gjøres lettere ved bruk av SVG ved hjelp av id for hver figur. Når det er sagt, spesifiserte oppgaven at minst 2 figurer skulle animeres og minst 10 skulle tegnes, noe som er helt overkommelig i canvas.
-                <br><u>CSS Grid vs. CSS Flexbox:</u><br>
-                Hovedforskjellen mellom CSS-Grid og CSS Flexbox er at flexbox er designet for layout i en dimensjon, enten en rad eller kolonne. Mens grid er designet for to-dimensjonal layout med både rader og kolonner.
-                <br><u>Hvorfor CSS Flexbox?</u><br>
-                Med tanke på at nettsiden har få, forskjellige elementer så var ikke behovet stort for å bruke Grid, og de kunne da bli plassert mer oversiktlig i en kolonne.
-                <br><u>jQuery:</u><br>
-                jQuery er et JavaScript bibliotek som gjør det mye lettere å traversere DOM-treet for en nettside og returnerer elementer som er spesifisert i søket. Det simplifiserer bl.a. HTML/DOM og CSS manipulering, HTML event metoder, effekter og animasjoner, og AJAX. jQuery gjør det lett for oss å gjemme/vise informasjon på nettsiden ved hjelp av brukerinteraksjon(knapper) og vi trenger heller ikke skrive mange linjer kode for å få denne funksjonaliteten.
-                <br><u>Cross-browser testing:</u><br>
-                Det er en metode for å kvalitetssikre nettsider på forskjellige browsere, med tanke på at hver browser har forskjellige javascript engines og leser kode ulikt.
+                <u><b>Canvas elementet:</b></u><br>
+                Dette er en del av HTML5 som gjør det mulig å tegne grafikk ved hjelp av skripting i JavaScript. 
+                Bruksområdet til canvas er å lage grafer, animasjoner, spill og bilder. 
+                Fordelene til canvas er at du kan lagre bildet som .png eller .jpg, samt at det egner seg for grafikkrevende spill. 
+                Ulempene er at det ikke er innebygd event handling og at du må tegne siden på nytt dersom du skal ha animasjoner (kan løses ved å tegne deler av scenen på nytt).<br>
+                <br><u><b>SVG:</b></u><br>
+                Dette er et XML-basert vektorbildeformat for to-dimensjonal grafikk som støtter både interaktivitet og animasjon. 
+                SVG bilder og deres oppførsel er definert i XML tekstfiler, som betyr at de kan bli traversert, programmert og komprimert. 
+                Fordeler med SVG er at event handling er innebygd og at nettleseren husker elementene slik at de lettere kan animeres. Ulempene er dårlig kjøretid dersom DOM-en brukes mye og SVG egner seg ikke godt for spill.<br>
+                <br><u><b>Hvorfor canvas?</b></u><br>
+                Med tanke på tidligere erfaring og bruk av canvas var det mer fornuftig for min del å bygge på den kunnskapen. 
+                Selv om jeg ser i ettertid at animering av figurerer kunne gjøres lettere ved bruk av SVG ved hjelp av event handling. 
+                Jeg ville nok ha byttet til SVG dersom jeg skulle gjort prosjektet på nytt. 
+                Når det er sagt, spesifiserte oppgaven at minst 2 figurer skulle animeres og minst 10 skulle tegnes, noe som er helt overkommelig i canvas. <br>
+                <br><u><b>CSS Grid og CSS Flexbox:</b></u><br>
+                Disse er utviklet for å løse problemet med hvordan elementene skal legge seg på nettsiden, slik at vi ikke lenger trenger å bruke tabeller, floats, posisjonering og inline-blokker for layout. 
+                De kan også brukes sammen til å løse forskjellige utfordringer.<br>
+                Hovedforskjellen mellom CSS-Grid og CSS Flexbox er at flexbox er designet for layout i en dimensjon, enten en rad eller kolonne. 
+                Mens grid er designet for to-dimensjonal layout med både rader og kolonner. I tillegg bruker man flexbox når man ønsker luft mellom elementene man har på nettsiden, mens grid er ofte brukt ved å lage layouten fra starten og deretter plassere elementene der man ønsker.<br>
+                <br><u><b>Hvorfor CSS Flexbox?</b></u><br>
+                Med tanke på at nettsiden har få, forskjellige elementer så var ikke behovet stort for å bruke Grid, og de kunne da bli plassert mer oversiktlig i en kolonne.<br>
+                <br><u><b>jQuery:</b></u><br>
+                jQuery er et JavaScript bibliotek som gjør det mye lettere å traversere DOM-treet for en nettside og returnerer elementer som er spesifisert i søket. 
+                Det simplifiserer bl.a. HTML/DOM og CSS manipulering, HTML event metoder, effekter og animasjoner, og AJAX. 
+                jQuery gjør det lettere for oss å gjemme/vise informasjon på nettsiden ved hjelp av brukerinteraksjon(knapper) og vi trenger heller ikke skrive mange linjer kode for å få denne funksjonaliteten.<br>
+                <br><u><b>Cross-browser testing:</b></u><br>
+                Det er en metode for å kvalitetssikre nettsider på forskjellige nettlesere, med tanke på at hver nettleser har forskjellige JavaScript motorer, f.eks. Chrome har V8, og nettleserne leser kode ulikt.
                 Det gjøres ved å sjekke kompatibiliteten av nettsiden ved forskjellige browsere, se etter bugs, samt at det er populært å se på nettrafikken for å finne ut hvilke browsere som brukes mest og sette inn ressursene på testing der.
-                Akkurat nå funksjonaliteten i nettsiden likt i Google Chrome, Internet Explorer og Microsoft Edge.<br>
+                Akkurat nå er funksjonaliteten til nettsiden likt i Google Chrome, Internett Explorer og Microsoft Edge.<br>
 
-                <br><u>Sentrale informasjonskilder:</u><br>
+                <br><u><b>Sentrale informasjonskilder:</b></u><br>
                 <ul>
                     <li>https://www.w3schools.com/html/html5_canvas.asp</li>
                     <li>https://www.youtube.com/playlist?list=PLkyEadCJGLm0tPLdUnRRZ3WQYH50TvzUQ</li>
                     <li>https://www.youtube.com/watch?v=JJSoEo8JSnc</li>
                 </ul>
-                <br><u>Dokumentasjonskilder:</u><br>
+                <br><u><b>Dokumentasjonskilder:</b></u><br>
                 <ul>
                     <li>https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout</li>
                     <li>https://crossbrowsertesting.com/blog/browsers/what-is-cross-browser-testing/</li>
+                    <li>https://en.wikipedia.org/wiki/JavaScript_engine</li>
                     <li>https://en.wikipedia.org/wiki/Scalable_Vector_Graphics</li>
                     <li>https://en.wikipedia.org/wiki/Canvas_element</li>
+                    <li>https://www.w3schools.com/html/html5_svg.asp</li>
+
                 </ul>
-                <br><u>Kilder:</u><br>
+                <br><u><b>Kilder for brukte kodesnutter:</b></u><br>
                 <ul>
                     <li>https://www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/</li>
                     <li>https://www.youtube.com/watch?v=yR1gWxazlfA&t=90s</li>
