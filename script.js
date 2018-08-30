@@ -45,7 +45,13 @@ var circles = [
     new Circle(150,290,30),
     new Circle(150,360,30),
 ]
-var rectangle = new Rectangle(250,50,100,300);
+var rectangles = [
+    new Rectangle(250,50,100,200),
+    new Rectangle(450,50,75,75),
+    new Rectangle(450,150,75,75),
+    new Rectangle(450,250,75,75),
+    new Rectangle(450,350,75,75),
+]
 
 c.beginPath();
 for(let i = 0; i < circles.length; i++){
@@ -58,14 +64,16 @@ c.arc(circle3.x,circle3.y,circle3.radius,0,Math.PI*2);
 c.arc(circle4.x,circle4.y,circle4.radius,0,Math.PI*2);
 c.arc(circle5.x,circle5.y,circle5.radius,0,Math.PI*2);*/
 c.fill();
-c.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+for(let i = 0; i < rectangles.length;i++){
+    c.fillRect(rectangles[i].x, rectangles[i].y, rectangles[i].width, rectangles[i].height);
+}
 c.closePath();
 
 //Skifter farge på sirkler
-function redrawColor(color){
-    c.clearRect(50,50,1,200);
+function redrawColor(color,i){
+    c.clearRect(50,50,50,50);
     c.beginPath();
-    c.arc(circles[0].x,circles[0].y,circles[0].radius,0,Math.PI*2);
+    c.arc(circles[i].x,circles[i].y,circles[i].radius,0,Math.PI*2);
     c.fillStyle = color;
     c.fill();
     c.closePath();
@@ -76,10 +84,10 @@ var biggerY = 25;
 
 //Lager større rekangler
 function makeBigger(){
-    c.clearRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
+    c.clearRect(rectangles[0].x,rectangles[0].y,rectangles[0].width,rectangles[0].height);
     c.beginPath();
     c.fillStyle = "black";
-    c.fillRect(rectangle.x, rectangle.y, rectangle.width + biggerX++, rectangle.height + biggerY++);
+    c.fillRect(rectangles[0].x, rectangles[0].y, rectangles[0].width + biggerX, rectangles[0].height + biggerY);
     c.closePath();
 }
 
@@ -93,12 +101,15 @@ canvas.addEventListener('click',function(e){
 
     //console.log(mouseX, mouseY);
     if(circles[0].isHitBy(mouseX,mouseY,150,150,100)){
-        redrawColor("red");
+        redrawColor("red",0);
     }
     
-    if(rectangle.isHitBy(mouseX,mouseY)){
+    if(rectangles[0].isHitBy(mouseX,mouseY)){
         console.log('Rectangle hit');
-        makeBigger();
+        if(rectangles[0].width < 150 && rectangles[0].height < 250){
+            makeBigger();
+        }
+        
     }
 });
 
