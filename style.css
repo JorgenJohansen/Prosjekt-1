@@ -24,7 +24,7 @@ body{
 }
 .box4{
     text-align:left;
-    /*display:none;*/
+    display:none;
     padding:10px;
     background-color: lightgray;
 }

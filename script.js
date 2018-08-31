@@ -3,9 +3,6 @@
 var canvas = document.getElementById('canvas');
 var c = canvas.getContext("2d");
 
-//canvas.width = canvas.scrollWidth;
-//canvas.width = canvas.scrollHeight;
-
 //Circle type
 var Circle = function(x,y,radius){
     this.x = x;
@@ -14,12 +11,9 @@ var Circle = function(x,y,radius){
 }
 
 //Sjekker om vi er inne i sirkelen
-Circle.prototype.isHitBy = function(x,y,cx,cy,radius){
-    //Sjekker om vi er inne i sirkelen
-    //var distance = Math.sqrt(Math.pow(x - this.x,2) + Math.pow(y - this.y, 2));
-    let distance = (x - cx) * (x - cx) + (y- cy)*(y - cy);
-    //var distance = Math.pow(x - this.x,2) + Math.pow(y - this.y,2);
-    return distance <= radius * radius;
+Circle.prototype.isHitBy = function(pointX,pointY,circleX,circleY,radius){
+    let distance = Math.sqrt((pointX - circleX)*(pointX - circleX) + (pointY - circleY)*(pointY - circleY));
+    return distance < radius;
 }
 
 //Rectangle type
@@ -30,14 +24,13 @@ var Rectangle = function(x,y,width,height,color){
     this.height = height;
 }
 
-//Sjekker om vi er inne i rektangelet
 Rectangle.prototype.isHitBy = function(x,y){
     //Sjekker om vi er inne i rektangelet
     return (x >= this.x && x <= this.x + this.width
     && y >= this.y && y <= this.y + this.height);
 }
 
-//Creates shapes (and draw)
+//Lager en liste med objekter(sirkler)
 var circles = [
     new Circle(150,80,30),    
     new Circle(150,150,30),
@@ -45,6 +38,8 @@ var circles = [
     new Circle(150,290,30),
     new Circle(150,360,30),
 ]
+
+//Lager en liste med objekter(rektangler)
 var rectangles = [
     new Rectangle(250,50,100,200),
     new Rectangle(450,50,75,75),
@@ -53,17 +48,14 @@ var rectangles = [
     new Rectangle(450,350,75,75),
 ]
 
+//Tegner sirklene
 c.beginPath();
 for(let i = 0; i < circles.length; i++){
     c.arc(circles[i].x,circles[i].y,circles[i].radius,0,Math.PI*2);
 }
-/*
-c.arc(circle.x,circle.y,circle.radius,0,Math.PI*2);
-c.arc(circle2.x,circle2.y,circle2.radius,0,Math.PI*2);
-c.arc(circle3.x,circle3.y,circle3.radius,0,Math.PI*2);
-c.arc(circle4.x,circle4.y,circle4.radius,0,Math.PI*2);
-c.arc(circle5.x,circle5.y,circle5.radius,0,Math.PI*2);*/
+
 c.fill();
+//Tegner rektanglene
 for(let i = 0; i < rectangles.length;i++){
     c.fillRect(rectangles[i].x, rectangles[i].y, rectangles[i].width, rectangles[i].height);
 }
@@ -91,25 +83,20 @@ function makeBigger(){
     c.closePath();
 }
 
-//User input
+//Bruker input
 canvas.addEventListener('click',function(e){
-    //console.log(e);
     var cBounds = canvas.getBoundingClientRect();
-    //console.log(cBounds);
     var mouseX = e.clientX - cBounds.left;
     var mouseY = e.clientY - cBounds.top;
 
-    //console.log(mouseX, mouseY);
     if(circles[0].isHitBy(mouseX,mouseY,150,150,100)){
         redrawColor("red",0);
     }
     
     if(rectangles[0].isHitBy(mouseX,mouseY)){
-        console.log('Rectangle hit');
         if(rectangles[0].width < 150 && rectangles[0].height < 250){
             makeBigger();
-        }
-        
+        } 
     }
 });
 

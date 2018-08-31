@@ -5,7 +5,14 @@ var rectangles = [
     {x:0, y:200, width: 100, height: 100, color: 'blue',speedX:3}
 ]
 
-
+/*
+Circle.prototype.isHitBy = function(x,y,cx,cy,radius){
+    //Sjekker om vi er inne i sirkelen
+    //var distance = Math.sqrt(Math.pow(x - this.x,2) + Math.pow(y - this.y, 2));
+    let distance = (x - cx) * (x - cx) + (y - cy)*(y - cy);
+    //var distance = Math.pow(x - this.x,2) + Math.pow(y - this.y,2);
+    return distance <= radius * radius;
+}*/
 
 //Funksjon som animerer figurer
 function update(){
